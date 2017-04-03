@@ -1,0 +1,7 @@
+<fieldset ng-disabled="form.readonly" class="schema-form-fieldset {{form.htmlClass}}">
+  <legend class="tile-header" ng-class="{'sr-only': !showTitle() }">{{ form.title }}</legend>
+
+  <div class="messages" ng-if="form.description">
+    <div class="message" ng-class="{ 'message-error': hasError(), 'message-success': hasSuccess(), 'message-info': form.feedback !== false }" sf-message="form.description"></div>
+  </div>
+</fieldset>

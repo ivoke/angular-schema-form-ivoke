@@ -1,0 +1,33 @@
+<fieldset class="fieldset tile schema-form-array {{form.htmlClass}}"
+      sf-field-model="sf-new-array"
+      sf-new-array>
+  <div class="tile-header">
+    <h2 class="tile-title" ng-show="showTitle()">{{ form.title }}</h2>
+  </div>
+  <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
+    <li class="list-group-item {{form.fieldHtmlClass}}"
+        schema-form-array-items
+        sf-field-model="ng-repeat"
+        ng-repeat="item in $$value$$ track by $index">
+      <button ng-hide="form.readonly || form.remove === null"
+              ng-click="deleteFromArray($index)"
+              ng-disabled="form.schema.minItems >= modelArray.length"
+              style="padding: 0; top: .75rem; right: 1.5rem;"
+              type="button" class="close pull-right">
+              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+      </button>
+    </li>
+  </ol>
+  <div class="tile-footer">
+    <button ng-hide="form.readonly || form.add === null"
+            ng-click="appendToArray()"
+            ng-disabled="form.schema.maxItems <= modelArray.length"
+            type="button"
+            class="btn {{ form.style.add || 'btn-link' }}">
+      {{ form.add || 'Add'}}
+    </button>
+  </div>
+  <div class="messages" ng-model="modelArray" schema-validate="form" ng-show="(hasError() && errorMessage(schemaError())) || form.description">
+    <div class="message message-info" ng-bind-html="(hasError() && errorMessage(schemaError())) || form.description"></div>
+  </div>
+</fieldset>

@@ -1,0 +1,21 @@
+<div class="form-group">
+  <div class="form-controls">
+    <div class="checkbox lightswitch schema-form-checkbox {{form.htmlClass}}">
+      <label class="{{form.labelHtmlClass}}">
+        <input type="checkbox"
+               sf-changed="form"
+               ng-disabled="form.readonly"
+               sf-field-model
+               schema-validate="form"
+               class="{{form.fieldHtmlClass}}"
+               name="{{form.key.slice(-1)[0]}}">
+        <div class="lightswitch-indicator"></div>
+        <span class="lightswitch-label" ng-bind-html="form.title"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="messages" ng-if="form.description">
+    <div class="message" ng-class="{ 'message-error': hasError(), 'message-success': hasSuccess(), 'message-info': form.feedback !== false }" sf-message="form.description"></div>
+  </div>
+</div>

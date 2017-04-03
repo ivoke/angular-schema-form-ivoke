@@ -1,0 +1,21 @@
+<div class="form-group schema-form-radios-inline {{form.htmlClass}}" >
+  <label class="{{form.labelHtmlClass}}"
+        ng-show="showTitle()" sf-field-model
+        schema-validate="form" >{{form.title}}</label>
+  <div>
+      <label class="radio-inline" ng-repeat="item in form.titleMap" >
+      <input type="radio"
+             class="radio-input {{form.fieldHtmlClass}}"
+             sf-changed="form"
+             ng-disabled="form.readonly"
+             sf-field-model
+             ng-value="item.value"
+             name="{{form.key.join('.')}}">
+      <span class="radio-label" ng-bind-html="item.name"></span>
+    </label>
+  </div>
+
+  <div class="messages" ng-if="form.description">
+    <div class="message" ng-class="{ 'message-error': hasError(), 'message-success': hasSuccess(), 'message-info': form.feedback !== false }" sf-message="form.description"></div>
+  </div>
+</div>
