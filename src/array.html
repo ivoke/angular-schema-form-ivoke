@@ -1,8 +1,8 @@
 <fieldset class="fieldset tile schema-form-array {{form.htmlClass}}"
       sf-field-model="sf-new-array"
       sf-new-array>
-  <div class="tile-header">
-    <h2 class="tile-title" ng-show="showTitle()">{{ form.title }}</h2>
+  <div class="tile-header" ng-if="form.title" ng-show="showTitle()">
+    <h2 class="tile-title">{{ form.title }}</h2>
   </div>
   <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
     <li class="list-group-item {{form.fieldHtmlClass}}"
