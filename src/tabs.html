@@ -1,14 +1,16 @@
-<div ng-init="selected = { tab: 0 }" class="schema-form-tabs {{form.htmlClass}}">
-  <ul class="nav nav-tabs">
-    <li ng-repeat="tab in form.tabs"
-        ng-disabled="form.readonly"
-        class="nav-item" 
-        ng-click="$event.preventDefault() || (selected.tab = $index)"
-        ng-class="{active: selected.tab === $index}">
-        <a class="nav-link" href="#">{{ tab.title }}</a>
-    </li>
-  </ul>
+<div ng-init="selected = { tab: 0 }" class="tile schema-form-tabs {{form.htmlClass}}">
+  <div class="tile-header">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="tab in form.tabs"
+          ng-disabled="form.readonly"
+          class="nav-item" 
+          ng-click="$event.preventDefault() || (selected.tab = $index)"
+          ng-class="{active: selected.tab === $index}">
+          <a class="nav-link" href="#">{{ tab.title }}</a>
+      </li>
+    </ul>
+  </div>
 
-  <div class="tab-content {{form.fieldHtmlClass}}">
+  <div class="tile-block tab-content {{form.fieldHtmlClass}}">
   </div>
 </div>
