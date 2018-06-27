@@ -26,6 +26,7 @@ sftp-config.json
 
 # Grunt
 node_modules
+bower_components
 
 # Sass & Ruby
 .sass-cache
