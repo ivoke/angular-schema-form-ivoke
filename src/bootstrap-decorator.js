@@ -1,5 +1,5 @@
-angular.module('schemaForm').config(['schemaFormDecoratorsProvider', 'sfBuilderProvider', 'sfPathProvider',
-function(decoratorsProvider, sfBuilderProvider, sfPathProvider) {
+angular.module('schemaForm').config(['schemaFormProvider', 'schemaFormDecoratorsProvider', 'sfBuilderProvider', 'sfPathProvider',
+function(schemaFormProvider, decoratorsProvider, sfBuilderProvider, sfPathProvider) {
   var base = 'decorators/bootstrap/';
 
   var simpleTransclusion  = sfBuilderProvider.builders.simpleTransclusion;
@@ -47,9 +47,62 @@ function(decoratorsProvider, sfBuilderProvider, sfPathProvider) {
     button: {template: base + 'submit.html', builder: defaults},
     radios: {template: base + 'radios.html', builder: defaults},
     'radios-inline': {template: base + 'radios-inline.html', builder: defaults},
+    date: {template: base + 'date.html', builder: defaults},
+    datetime: {template: base + 'datetime.html', builder: defaults},
+    float: {template: base + 'float.html', builder: defaults},
+    currency: {template: base + 'currency.html', builder: defaults},
     radiobuttons: {template: base + 'radio-buttons.html', builder: defaults},
     help: {template: base + 'help.html', builder: defaults},
     'default': {template: base + 'default.html', builder: defaults}
   }, []);
+
+  var dateField = function(name, schema, options) {
+    if (schema.type === 'string' && (schema.format === 'date')) {
+      var f = schemaFormProvider.stdFormObj(name, schema, options);
+      f.key = options.path;
+      f.type = 'date';
+      options.lookup[sfPathProvider.stringify(options.path)] = f;
+      return f;
+    }
+  };
+
+  var dateTimeField = function(name, schema, options) {
+    if (schema.type === 'string' && (schema.format === 'datetime')) {
+      var f = schemaFormProvider.stdFormObj(name, schema, options);
+      f.key = options.path;
+      f.type = 'datetime';
+      options.lookup[sfPathProvider.stringify(options.path)] = f;
+      return f;
+    }
+  };
+
+  var floatField = function(name, schema, options) {
+    if (schema.type === 'number' && (schema.format === 'float')) {
+      var f = schemaFormProvider.stdFormObj(name, schema, options);
+      f.key = options.path;
+      f.type = 'float';
+      options.lookup[sfPathProvider.stringify(options.path)] = f;
+      return f;
+    }
+  };
+  
+  var currencyField = function(name, schema, options) {
+    if (schema.type === 'number' && (schema.format === 'currency')) {
+      var f = schemaFormProvider.stdFormObj(name, schema, options);
+      f.key = options.path;
+      f.type = 'currency';
+      options.lookup[sfPathProvider.stringify(options.path)] = f;
+      return f;
+    }
+  };
+
+  
+  
+  
+  schemaFormProvider.defaults.string.unshift(dateField, dateTimeField);
+  schemaFormProvider.defaults.number.unshift(floatField, currencyField);
+
+
+
 
 }]);
